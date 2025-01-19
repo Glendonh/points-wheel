@@ -21,9 +21,21 @@ const data = [
 
 const App = () => {
   const [mustSpin, setMustSpin] = useState(false);
-  const toggleSpin = () => {
-    setMustSpin((spin) => !spin);
+  const [prizeNumber, setPrizeNumber] = useState(0);
+
+  const handleSpinClick = () => {
+    if (!mustSpin) {
+      const newPrizeNumber = Math.floor(Math.random() * data.length);
+      setPrizeNumber(newPrizeNumber);
+      setMustSpin(true);
+    }
   };
+
+  const handleStop = () => {
+    console.log(data[prizeNumber].option);
+    setMustSpin(false);
+  };
+
   return (
     <div className="App">
       <header className="App-header">
@@ -31,9 +43,9 @@ const App = () => {
           mustStartSpinning={mustSpin}
           prizeNumber={1}
           data={data}
-          onStopSpinning={console.log}
+          onStopSpinning={handleStop}
         />
-        <button onClick={toggleSpin}>Spin</button>
+        <button onClick={handleSpinClick}>Spin</button>
       </header>
     </div>
   );

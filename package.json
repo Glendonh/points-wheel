@@ -12,7 +12,6 @@
     "react-custom-roulette": "1.4.1",
     "react-dom": "^19.0.0",
     "react-scripts": "5.0.1",
-    "react-wheel-of-prizes": "1.0.6",
     "typescript": "5.7.3"
   },
   "scripts": {
