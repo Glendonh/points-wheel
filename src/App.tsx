@@ -2,26 +2,38 @@ import React, { useState } from "react";
 import { Wheel } from "react-custom-roulette";
 import "./App.css";
 
-const segments = ["fart", "butt", "weiner", "happy", "up your butt"];
-
-const segColors = ["#EE4040", "#F0cf50", "#815cd1", "#3da5e0", "#34a24f"];
-
-const getWinner = (): string => {
-  const index = Math.floor(Math.random() * segments.length);
-  console.log(index, segments[index]);
-  return segments[index];
-};
-
 const data = [
-  { option: "1", style: { backgroundColor: "#EE4040" } },
-  { option: "2", style: { backgroundColor: "#F0cf50" } },
-  { option: "3", style: { backgroundColor: "#815cd1" } },
-  { option: "4", style: { backgroundColor: "#3da5e0" } },
+  { option: "100", value: 100, style: { backgroundColor: "#B3995D" } },
+  { option: "200", value: 200, style: { backgroundColor: "#4BFF36" } },
+  { option: "300", value: 300, style: { backgroundColor: "#8921C2" } },
+  { option: "400", value: 400, style: { backgroundColor: "#35C4F8" } },
+  { option: "500", value: 500, style: { backgroundColor: "#B3995D" } },
+  { option: "600", value: 600, style: { backgroundColor: "#4BFF36" } },
+  { option: "700", value: 700, style: { backgroundColor: "#8921C2" } },
+  { option: "800", value: 800, style: { backgroundColor: "#35C4F8" } },
 ];
+
+const initialScores = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+const teams = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
 const App = () => {
   const [mustSpin, setMustSpin] = useState(false);
   const [prizeNumber, setPrizeNumber] = useState(0);
+  const [scores, setScores] = useState(initialScores);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [teamCount, setTeamCount] = useState(2);
+
+  const addScoreToIndex = (args: { index: number; score: number }) => {
+    const newScores = [...scores];
+    newScores[args.index] = scores[args.index] + args.score;
+    console.log(newScores, args);
+    setScores(newScores);
+  };
+
+  const handleTeamSpin = (index: number) => {
+    setActiveIndex(index);
+    handleSpinClick();
+  };
 
   const handleSpinClick = () => {
     if (!mustSpin) {
@@ -32,21 +44,58 @@ const App = () => {
   };
 
   const handleStop = () => {
-    console.log(data[prizeNumber].option);
+    addScoreToIndex({ index: activeIndex, score: data[prizeNumber].value });
     setMustSpin(false);
+  };
+
+  const handleReset = () => {
+    setScores(initialScores);
+  };
+
+  const handleTeamSelect = (e) => {
+    setTeamCount(e.target.value);
+    handleReset();
   };
 
   return (
     <div className="App">
-      <header className="App-header">
+      <header className="App-header">Randy is cool</header>
+      <div className="row">
+        <div className="column">
+          {teams.map((team, i) => {
+            if (teamCount <= i) return null;
+            return (
+              <div className="row" key={team}>
+                <button
+                  onClick={() => handleTeamSpin(i)}
+                >{`Team ${team}`}</button>
+                <span>{scores[i]}</span>
+              </div>
+            );
+          })}
+        </div>
         <Wheel
           mustStartSpinning={mustSpin}
-          prizeNumber={1}
+          prizeNumber={prizeNumber}
           data={data}
           onStopSpinning={handleStop}
         />
-        <button onClick={handleSpinClick}>Spin</button>
-      </header>
+        <div>
+          <span>How Many Teams?</span>
+          <select onChange={handleTeamSelect}>
+            <option value={2}>2</option>
+            <option value={3}>3</option>
+            <option value={4}>4</option>
+            <option value={5}>5</option>
+            <option value={6}>6</option>
+            <option value={7}>7</option>
+            <option value={8}>8</option>
+            <option value={9}>9</option>
+            <option value={10}>10</option>
+          </select>
+        </div>
+      </div>
+      <button onClick={handleReset}>Reset</button>
     </div>
   );
 };
