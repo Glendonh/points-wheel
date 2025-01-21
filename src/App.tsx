@@ -22,6 +22,7 @@ const App = () => {
   const [scores, setScores] = useState(initialScores);
   const [activeIndex, setActiveIndex] = useState(0);
   const [teamCount, setTeamCount] = useState(2);
+  const [openEdit, setOpenEdit] = useState<number | null>(null);
 
   const addScoreToIndex = (args: { index: number; score: number }) => {
     const newScores = [...scores];
@@ -57,6 +58,16 @@ const App = () => {
     handleReset();
   };
 
+  const updateTeamScore = (e) => {
+    const newScore = e.get("newScore");
+    const newScores = [...scores];
+    if (openEdit !== null) {
+      newScores[openEdit] = Number(newScore);
+      setScores(newScores);
+    }
+    setOpenEdit(null);
+  };
+
   return (
     <div className="App">
       <header className="App-header">Randy is cool</header>
@@ -67,35 +78,48 @@ const App = () => {
             return (
               <div className="row" key={team}>
                 <button
+                  className="team-button"
                   onClick={() => handleTeamSpin(i)}
                 >{`Team ${team}`}</button>
-                <span>{scores[i]}</span>
+                <span className="team-score">{scores[i]}</span>
+                <button onClick={() => setOpenEdit(i)} className="edit-button">
+                  ✎
+                </button>
               </div>
             );
           })}
         </div>
+        {openEdit !== null ? (
+          <div className="modal">
+            <form action={updateTeamScore}>
+              <input name="newScore" type="number" />
+              <button>Submit</button>
+              <button onClick={() => setOpenEdit(null)}>✕</button>
+            </form>
+          </div>
+        ) : null}
         <Wheel
           mustStartSpinning={mustSpin}
           prizeNumber={prizeNumber}
           data={data}
           onStopSpinning={handleStop}
         />
-        <div>
-          <span>How Many Teams?</span>
-          <select onChange={handleTeamSelect}>
-            <option value={2}>2</option>
-            <option value={3}>3</option>
-            <option value={4}>4</option>
-            <option value={5}>5</option>
-            <option value={6}>6</option>
-            <option value={7}>7</option>
-            <option value={8}>8</option>
-            <option value={9}>9</option>
-            <option value={10}>10</option>
-          </select>
-        </div>
       </div>
       <button onClick={handleReset}>Reset</button>
+      <div>
+        <span>How Many Teams?</span>
+        <select onChange={handleTeamSelect}>
+          <option value={2}>2</option>
+          <option value={3}>3</option>
+          <option value={4}>4</option>
+          <option value={5}>5</option>
+          <option value={6}>6</option>
+          <option value={7}>7</option>
+          <option value={8}>8</option>
+          <option value={9}>9</option>
+          <option value={10}>10</option>
+        </select>
+      </div>
     </div>
   );
 };

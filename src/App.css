@@ -1,7 +1,7 @@
 .App {
   text-align: center;
   background-color: #282c34;
-  color: #ddd
+  color: #ddd;
 }
 
 .App-logo {
@@ -12,6 +12,42 @@
 .row {
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  margin-bottom: 3px;
+}
+
+.team-button {
+  font-size: 1.5rem;
+  margin-right: 0.5rem;
+}
+
+.team-score {
+  font-size: 1.5rem;
+  font-weight: 700;
+  align-self: center;
+  color: #F23CA6;
+}
+
+.edit-button {
+  height: 50%;
+  align-self: flex-end;
+  margin-left: 0.5rem;
+}
+
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #888;
+  padding: 2rem;
+  border-radius: 3px;
+  z-index: 99;
+  input {
+    background-color: #fff;
+  }
 }
 
 @media (prefers-reduced-motion: no-preference) {
