@@ -3,14 +3,47 @@ import { Wheel } from "react-custom-roulette";
 import "./App.css";
 
 const data = [
-  { option: "100", value: 100, style: { backgroundColor: "#B3995D" } },
+  { option: "100", value: 100, style: { backgroundColor: "#008E97" } },
   { option: "200", value: 200, style: { backgroundColor: "#4BFF36" } },
   { option: "300", value: 300, style: { backgroundColor: "#8921C2" } },
   { option: "400", value: 400, style: { backgroundColor: "#35C4F8" } },
-  { option: "500", value: 500, style: { backgroundColor: "#B3995D" } },
-  { option: "600", value: 600, style: { backgroundColor: "#4BFF36" } },
-  { option: "700", value: 700, style: { backgroundColor: "#8921C2" } },
-  { option: "800", value: 800, style: { backgroundColor: "#35C4F8" } },
+  { option: "500", value: 500, style: { backgroundColor: "#FEE123" } },
+  {
+    option: "600",
+    value: 600,
+    style: { backgroundColor: "#97233F", textColor: "#fff" },
+  },
+  {
+    option: "700",
+    value: 700,
+    style: { backgroundColor: "#4F2683", textColor: "#fff" },
+  },
+  {
+    option: "800",
+    value: 800,
+    style: { backgroundColor: "#003262", textColor: "#fff" },
+  },
+  {
+    option: "900",
+    value: 900,
+    style: { backgroundColor: "#154733", textColor: "#fff" },
+  },
+  {
+    option: "1000",
+    value: 1000,
+    style: { backgroundColor: "#A2AAAD" },
+  },
+  {
+    option: "2000",
+    value: 2000,
+    style: { backgroundColor: "#B3995D" },
+  },
+  { option: "💣", value: 0, style: { backgroundColor: "#000" } },
+  {
+    option: "3000",
+    value: 3000,
+    style: { backgroundColor: "#9F792C" },
+  },
 ];
 
 const initialScores = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
@@ -24,10 +57,19 @@ const App = () => {
   const [teamCount, setTeamCount] = useState(2);
   const [openEdit, setOpenEdit] = useState<number | null>(null);
 
-  const addScoreToIndex = (args: { index: number; score: number }) => {
+  const addScoreToIndex = ({
+    index,
+    score,
+  }: {
+    index: number;
+    score: number;
+  }) => {
     const newScores = [...scores];
-    newScores[args.index] = scores[args.index] + args.score;
-    console.log(newScores, args);
+    if (score) {
+      newScores[index] = scores[index] + score;
+    } else {
+      newScores[index] = 0;
+    }
     setScores(newScores);
   };
 
@@ -70,7 +112,7 @@ const App = () => {
 
   return (
     <div className="App">
-      <header className="App-header">Randy is cool</header>
+      <header className="App-header">Randy's Wheel of Fortune</header>
       <div className="row">
         <div className="column">
           {teams.map((team, i) => {
@@ -91,6 +133,7 @@ const App = () => {
         </div>
         {openEdit !== null ? (
           <div className="modal">
+            <p>{`Enter Team ${openEdit + 1} Score`}</p>
             <form action={updateTeamScore}>
               <input name="newScore" type="number" />
               <button>Submit</button>

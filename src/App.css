@@ -1,6 +1,7 @@
 .App {
   text-align: center;
   background-color: #282c34;
+  height: 100vh;
   color: #ddd;
 }
 
@@ -42,8 +43,8 @@
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: #888;
-  padding: 2rem;
-  border-radius: 3px;
+  padding: 0 32px 32px;
+  border-radius: 10px;
   z-index: 99;
   input {
     background-color: #fff;
