@@ -118,7 +118,7 @@ const App = () => {
           {teams.map((team, i) => {
             if (teamCount <= i) return null;
             return (
-              <div className="row" key={team}>
+              <div className="row team-row" key={team}>
                 <button
                   className="team-button"
                   onClick={() => handleTeamSpin(i)}
@@ -141,27 +141,31 @@ const App = () => {
             </form>
           </div>
         ) : null}
-        <Wheel
-          mustStartSpinning={mustSpin}
-          prizeNumber={prizeNumber}
-          data={data}
-          onStopSpinning={handleStop}
-        />
+        <div className="wheel-row">
+          <Wheel
+            mustStartSpinning={mustSpin}
+            prizeNumber={prizeNumber}
+            data={data}
+            onStopSpinning={handleStop}
+          />
+        </div>
       </div>
-      <button onClick={handleReset}>Reset</button>
-      <div>
-        <span>How Many Teams?</span>
-        <select onChange={handleTeamSelect}>
-          <option value={2}>2</option>
-          <option value={3}>3</option>
-          <option value={4}>4</option>
-          <option value={5}>5</option>
-          <option value={6}>6</option>
-          <option value={7}>7</option>
-          <option value={8}>8</option>
-          <option value={9}>9</option>
-          <option value={10}>10</option>
-        </select>
+      <div className="control-row">
+        <button onClick={handleReset}>Reset</button>
+        <div className="team-select">
+          <span>How Many Teams?</span>
+          <select onChange={handleTeamSelect}>
+            <option value={2}>2</option>
+            <option value={3}>3</option>
+            <option value={4}>4</option>
+            <option value={5}>5</option>
+            <option value={6}>6</option>
+            <option value={7}>7</option>
+            <option value={8}>8</option>
+            <option value={9}>9</option>
+            <option value={10}>10</option>
+          </select>
+        </div>
       </div>
     </div>
   );

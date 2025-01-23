@@ -5,18 +5,26 @@
   color: #ddd;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
 .row {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
   padding-left: 1rem;
   padding-right: 1rem;
   margin-bottom: 3px;
+}
+
+.wheel-row {
+  display: flex;
+  flex-grow: 1;
+  margin-right: 40px;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.control-row {
+  display: flex;
+  flex-direction: row;
+  margin-left: 2rem;
 }
 
 .team-button {
@@ -24,11 +32,19 @@
   margin-right: 0.5rem;
 }
 
+.team-row {
+  margin-bottom: 0.5rem;
+}
+
 .team-score {
   font-size: 1.5rem;
   font-weight: 700;
   align-self: center;
   color: #F23CA6;
+}
+
+.team-select {
+  margin-left: 0.5rem;
 }
 
 .edit-button {
@@ -51,11 +67,6 @@
   }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
 
 .App-header {
   display: flex;
@@ -64,17 +75,9 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+  padding: 2rem 0;
 }
 
 .App-link {
   color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
 }

@@ -8,3 +8,7 @@ He had been using a similar application but requested some additional features:
 
 - The ability to set the number of teams at the start of the game.
 - The ability to edit scores if points are accidentally assigned to the wrong team.
+
+## Demo
+
+[See it live](https://glendonhardin.com/points-wheel/)
